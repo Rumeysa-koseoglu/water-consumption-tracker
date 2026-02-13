@@ -5,3 +5,23 @@
 }
 
 @import "tailwindcss";
+
+.font-bungee {
+  font-family: "Bungee", sans-serif;
+}
+
+.font-outfit {
+  font-family: "Outfit", sans-serif;
+}
+
+.font-dancingScript {
+  font-family: "Dancing Script", sans-serif;
+}
+
+.word-spacing {
+  word-spacing: 36px;
+}
+
+.word-spacing-sm {
+  word-spacing: 24px;
+}
