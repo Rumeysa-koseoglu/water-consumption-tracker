@@ -1,7 +1,11 @@
 import { FolderPlus } from "lucide-react";
 import React, { useState } from "react";
 
-function DailyEntry() {
+interface DailyEntryProps {
+  onEntryAdded: () => void;
+}
+
+function DailyEntry({ onEntryAdded }: DailyEntryProps) {
   const [date, setDate] = useState<string>("");
   const [amount, setAmount] = useState<number>(1);
   const [category, setCategory] = useState<string>("");
@@ -23,8 +27,9 @@ function DailyEntry() {
 
       if (res.ok) {
         setDate("");
-        setAmount(0);
+        setAmount(1);
         setCategory("");
+        onEntryAdded();
         console.log("entry added successfully:", data);
       } else {
         console.error("server error:", data.message);
@@ -36,7 +41,7 @@ function DailyEntry() {
 
   return (
     <div
-      className="w-120  p-5 bg-[#243046] rounded-xl text-gray-400"
+      className=" p-5 bg-[#243046] rounded-xl text-gray-400"
       id="entry-container"
     >
       <h1 className="mb-4 text-lg font-bold text-gray-200">
