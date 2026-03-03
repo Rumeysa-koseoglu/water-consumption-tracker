@@ -1,37 +1,56 @@
 import { FolderPlus } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface DailyEntryProps {
   onEntryAdded: () => void;
+  editEntry: any | null;
+  setEditEntry: (val: any) => void;
 }
 
-function DailyEntry({ onEntryAdded }: DailyEntryProps) {
+function DailyEntry({
+  onEntryAdded,
+  editEntry,
+  setEditEntry,
+}: DailyEntryProps) {
   const [date, setDate] = useState<string>("");
   const [amount, setAmount] = useState<number>(1);
   const [category, setCategory] = useState<string>("");
 
+  useEffect(() => {
+    if (editEntry) {
+      setDate(editEntry.date.split("T")[0]);
+      setAmount(editEntry.amount);
+      setCategory(editEntry.category);
+    }
+  }, [editEntry]);
+
   const submitEntry = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const URL = "http://localhost:5500/api/water/add-entry";
+    const method = editEntry ? "PUT" : "POST";
+
+    const URL = editEntry
+      ? `http://localhost:5500/api/water/entries/${editEntry.id}`
+      : "http://localhost:5500/api/water/add-entry";
 
     try {
       const res = await fetch(URL, {
-        method: "POST",
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ date, amount, category }),
       });
 
-      const data = await res.json();
-
       if (res.ok) {
+        const data = await res.json();
+        onEntryAdded();
+        setEditEntry(null);
         setDate("");
         setAmount(1);
         setCategory("");
-        onEntryAdded();
-        console.log("entry added successfully:", data);
+        console.log("entry added/updated successfully:", data);
       } else {
-        console.error("server error:", data.message);
+        const errorText = await res.text();
+        console.error("server error:", res.status, errorText);
       }
     } catch (err) {
       console.error("error submitting form:", err);
@@ -40,7 +59,9 @@ function DailyEntry({ onEntryAdded }: DailyEntryProps) {
 
   return (
     <div
-      className=" p-5 bg-[#243046] rounded-xl text-gray-400"
+      className={`p-5 bg-[#243046] rounded-xl text-gray-400 transition-all duration-300 border-2 ${
+        editEntry ? "border-blue-500 shadow-lg shadow-blue-500/20" : "border-transparent "
+      }`}
       id="entry-container"
     >
       <h1 className="mb-4 text-lg font-bold text-gray-200">
@@ -79,10 +100,11 @@ function DailyEntry({ onEntryAdded }: DailyEntryProps) {
             <option value="Bathing">Bathing</option>
             <option value="Washing">Washing</option>
             <option value="Drinking">Drinking</option>
+            <option value="Other">Other</option>
           </select>
         </div>
         <button className="bg-[#284d79] rounded-3xl mt-4 text-gray-200 font-bold flex items-center justify-start gap-4 py-2 px-4 w-[40%] cursor-pointer active:scale-95">
-          <FolderPlus size={25} color="#0a2a50" /> Add Entry
+          <FolderPlus size={25} color="#0a2a50" /> {editEntry ? "Update Entry" : "Add Entry"}
         </button>
       </form>
     </div>
