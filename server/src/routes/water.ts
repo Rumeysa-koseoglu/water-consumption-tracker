@@ -32,7 +32,7 @@ router.post("/add-entry", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/entries", async (req: Request, res: Response) => {
+router.get("/get-entries", async (req: Request, res: Response) => {
   try {
     const result = await query(`SELECT * FROM water_usage ORDER BY id ASC`);
 
@@ -89,6 +89,7 @@ router.delete("/entries/:id", async (req: Request, res: Response) => {
 
     res
       .status(200)
+
       .json({ message: "Entry deleted successfully", deleted: result.rows[0] });
   } catch (err) {
     console.error(err);
