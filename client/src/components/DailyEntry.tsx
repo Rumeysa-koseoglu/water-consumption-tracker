@@ -9,7 +9,6 @@ function DailyEntry({ onEntryAdded }: DailyEntryProps) {
   const [date, setDate] = useState<string>("");
   const [amount, setAmount] = useState<number>(1);
   const [category, setCategory] = useState<string>("");
-  console.log("date:", date, "amount:", amount, "category:", category);
 
   const submitEntry = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
