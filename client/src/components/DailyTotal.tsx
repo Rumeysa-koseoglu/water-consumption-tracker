@@ -19,7 +19,7 @@ const DailyTotal = ({ total, limit }: { total: number; limit: number }) => {
       </p>
       {isOverLimit && (
         <p className="text-red-400 text-sm mt-2 font-bold animate-pulse">
-          MicrophoneWarning: You have exceeded your {limit}L limit!
+          You have exceeded your {limit}L limit!
         </p>
       )}
     </div>
