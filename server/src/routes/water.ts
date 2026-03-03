@@ -74,7 +74,7 @@ router.put("/entries/:id", async (req: Request, res: Response) => {
   }
 });
 
-router.delete("/entries/:id", async (req: Request, res: Response) => {
+router.delete("/delete-entry/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
