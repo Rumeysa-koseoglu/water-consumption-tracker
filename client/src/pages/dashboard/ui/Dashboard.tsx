@@ -11,8 +11,10 @@ const Dashboard: React.FC = () => {
   const [editEntry, setEditEntry] = useState<any | null>(null);
 
   const fetchEntries = async () => {
+    const URL =
+      "https://water-consumption-tracker-backend.onrender.com/api/water/get-entries";
     try {
-      const res = await fetch("http://localhost:5500/api/water/get-entries");
+      const res = await fetch(URL);
       const data = await res.json();
       setEntries(data);
     } catch (err) {

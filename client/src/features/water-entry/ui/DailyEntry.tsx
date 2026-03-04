@@ -30,8 +30,8 @@ function DailyEntry({
     const method = editEntry ? "PUT" : "POST";
 
     const URL = editEntry
-      ? `http://localhost:5500/api/water/entries/${editEntry.id}`
-      : "http://localhost:5500/api/water/add-entry";
+      ? `https://water-consumption-tracker-backend.onrender.com/api/water/entries/${editEntry.id}`
+      : "https://water-consumption-tracker-backend.onrender.com/api/water/add-entry";
 
     try {
       const res = await fetch(URL, {
