@@ -5,9 +5,13 @@ import authRoutes from "./routes/auth.js";
 import waterRoutes from "./routes/water.js";
 
 const app = express();
-const PORT = 5500;
+const PORT = process.env.PORT || 5500;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://water-consumption-tracker.onrender.com",
+  })
+);
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
