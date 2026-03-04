@@ -4,6 +4,7 @@ import DailyTotal from "./DailyTotal";
 import DailyUsageByCategory from "./DailyUsageByCategory";
 import DailyUsageList from "./DailyUsageList";
 import Header from "./Header";
+import WeeklyUsageSummary from "./WeeklyUsageSummary";
 
 const Dashboard: React.FC = () => {
   const [entries, setEntries] = useState<any[]>([]);
@@ -58,8 +59,23 @@ const Dashboard: React.FC = () => {
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const getWeeklyData = (entries: any) => {
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const summary = days.map((day) => ({ day, total: 0 }));
+
+    entries.forEach((entry: any) => {
+      const date = new Date(entry.date);
+      const dayName = days[date.getDay()];
+      const dayObj = summary.find((d) => d.day === dayName);
+      if (dayObj) dayObj.total += Number(entry.amount || 0);
+    });
+    return summary;
+  };
+
+  const weeklyData = getWeeklyData(entries);
+
   return (
-    <div className="w-screen h-screen flex flex-col font-outfit p-4 overflow-auto">
+    <div className="w-screen h-screen flex flex-col font-outfit p-4 pt-0 overflow-auto">
       <Header />
       <div className="p-8 grid grid-cols-2 gap-6">
         <DailyEntry
@@ -69,6 +85,7 @@ const Dashboard: React.FC = () => {
         />
         <DailyTotal total={totalLiters} limit={150} />
         <DailyUsageByCategory categories={categoryTotals} />
+        <WeeklyUsageSummary data={weeklyData} />
         <DailyUsageList
           entries={entries}
           onDelete={deleteEntry}
