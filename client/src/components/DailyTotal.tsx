@@ -10,7 +10,7 @@ const DailyTotal = ({ total, limit }: { total: number; limit: number }) => {
       }`}
     >
       <h3
-        className={` mb-4 text-lg font-bold uppercase ${
+        className={` mb-4 text-lg md:text-xl font-bold uppercase ${
           isOverLimit ? "text-red-500" : "text-[#9ec8fb]"
         }`}
       >
@@ -18,18 +18,20 @@ const DailyTotal = ({ total, limit }: { total: number; limit: number }) => {
       </h3>
       <div className="flex flex-col items-start justify-center gap-10 p-4">
         <p
-          className={`text-5xl font-bold ${
+          className={`text-4xl md:text-5xl font-bold ${
             isOverLimit ? "text-red-500" : "text-[#79bef5]"
           }`}
         >
           {total.toFixed(2)} L
         </p>
         {isOverLimit ? (
-          <p className="text-red-400 text-3xl mt-2 font-bold animate-pulse">
+          <p className="text-red-400 text-2xl md:text-3xl font-bold animate-pulse">
             You have exceeded your {limit}L limit!
           </p>
         ) : (
-          <p className=" text-[#9fbd92] text-3xl">(Your daily limit is 150L)</p>
+          <p className=" text-[#9fbd92] text-2xl md:text-3xl">
+            (Your daily limit is 150L)
+          </p>
         )}
       </div>
     </div>

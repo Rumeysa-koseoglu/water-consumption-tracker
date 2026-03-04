@@ -77,7 +77,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="w-screen h-screen flex flex-col font-outfit p-4 pt-0 overflow-auto">
       <Header />
-      <div className="p-8 grid grid-cols-2 gap-6">
+      <div className="p-0 sm:p-3 md:p-8 flex flex-col lg:grid grid-cols-2 gap-6">
         <DailyEntry
           onEntryAdded={fetchEntries}
           editEntry={editEntry}

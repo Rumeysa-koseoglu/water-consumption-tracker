@@ -64,7 +64,7 @@ function DailyEntry({
       }`}
       id="entry-container"
     >
-      <h1 className="mb-4 text-lg font-bold text-[#9ec8fb] uppercase">
+      <h1 className="mb-6 text-lg lg:text-xl font-bold text-[#9ec8fb] uppercase">
         Daily Water Entry
       </h1>
       <form className="flex flex-col gap-5" onSubmit={submitEntry}>
@@ -75,16 +75,16 @@ function DailyEntry({
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="bg-[#284d79] rounded-lg py-1 px-4 text-base"
+            className="bg-[#284d79] rounded-lg py-1 md:py-2 px-4 text-base"
           />
         </div>
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between items-center">
           <label>Water Amount (liters)</label>
           <input
             type="number"
             value={amount}
             onChange={(e) => setAmount(Number(e.target.value))}
-            className="outline-none border border-[#284d79] focus:border-blue-400 rounded-lg p-1"
+            className="outline-none border border-[#284d79] focus:border-blue-400 rounded-lg p-1 pl-3 w-[60%] md:w-[50%] lg:w-[40%] h-10 "
           />
         </div>
         {/* usage type */}
@@ -94,7 +94,7 @@ function DailyEntry({
             name="usage-types"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="bg-[#284d79] rounded-lg py-1 px-4"
+            className="bg-[#284d79] rounded-lg py-1 md:py-2 px-4"
           >
             <option value="Cooking">Cooking</option>
             <option value="Bathing">Bathing</option>
@@ -103,9 +103,11 @@ function DailyEntry({
             <option value="Other">Other</option>
           </select>
         </div>
-        <button className="bg-[#284d79] rounded-3xl mt-4 text-gray-200 font-bold flex items-center justify-start gap-4 py-2 px-4 w-[30%] cursor-pointer active:scale-95">
+        <button className="bg-[#284d79] rounded-3xl mt-4 text-gray-200 md:text-lg font-bold flex items-center justify-start py-2 lg:py-3 px-5 cursor-pointer active:scale-95">
           <FolderPlus size={25} color="#13325b" />
-          {editEntry ? "Update Entry" : "Add Entry"}
+          <span className="ml-[25%] md:ml-[40%]">
+            {editEntry ? "Update Entry" : "Add Entry"}
+          </span>
         </button>
       </form>
     </div>
