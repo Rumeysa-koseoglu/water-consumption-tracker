@@ -18,10 +18,16 @@ const Dashboard: React.FC = () => {
 
     try {
       const res = await fetch(URL);
-      const data = await res.json();
-      setEntries(data);
+      if (res.ok) {
+        const data = await res.json();
+        setEntries(data);
+      } else {
+        console.error("Server error:", res.status);
+        setEntries([]);
+      }
     } catch (err) {
       console.error("Failed to fetch", err);
+      setEntries([]);
     }
   };
 
@@ -34,11 +40,14 @@ const Dashboard: React.FC = () => {
     0
   );
 
-  const categoryTotals = entries.reduce((acc: any, curr) => {
-    const cat = curr.category || "Other";
-    acc[cat] = (acc[cat] || 0) + Number(curr.amount);
-    return acc;
-  }, {});
+  const categoryTotals = (Array.isArray(entries) ? entries : []).reduce(
+    (acc: any, curr) => {
+      const cat = curr.category || "Other";
+      acc[cat] = (acc[cat] || 0) + Number(curr.amount || 0);
+      return acc;
+    },
+    {}
+  );
 
   const deleteEntry = async (id: string) => {
     if (!window.confirm("Are you sure you want to delete this?")) return;
@@ -69,7 +78,7 @@ const Dashboard: React.FC = () => {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const summary = days.map((day) => ({ day, total: 0 }));
 
-    entries.forEach((entry: any) => {
+    (Array.isArray(entries) ? entries : []).forEach((entry: any) => {
       const date = new Date(entry.date);
       const dayName = days[date.getDay()];
       const dayObj = summary.find((d) => d.day === dayName);
