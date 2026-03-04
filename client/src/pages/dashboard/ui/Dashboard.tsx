@@ -11,8 +11,7 @@ const Dashboard: React.FC = () => {
   const [editEntry, setEditEntry] = useState<any | null>(null);
 
   const fetchEntries = async () => {
-    const URL =
-      "https://water-consumption-tracker-backend.onrender.com/api/water/get-entries";
+    const URL = `${import.meta.env.VITE_API_URL}/api/water/get-entries`;
     try {
       const res = await fetch(URL);
       const data = await res.json();
@@ -26,7 +25,7 @@ const Dashboard: React.FC = () => {
     fetchEntries();
   }, []);
 
-  const totalLiters = entries.reduce(
+  const totalLiters = (Array.isArray(entries) ? entries : []).reduce(
     (acc: any, curr) => acc + Number(curr.amount || 0),
     0
   );
@@ -42,7 +41,7 @@ const Dashboard: React.FC = () => {
 
     try {
       const res = await fetch(
-        `https://water-consumption-tracker-backend.onrender.com/api/water/delete-entry/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/water/delete-entry/${id}`,
         {
           method: "DELETE",
         }

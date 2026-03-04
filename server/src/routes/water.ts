@@ -37,8 +37,9 @@ router.get("/get-entries", async (req: Request, res: Response) => {
     const result = await query(`SELECT * FROM water_usage ORDER BY id ASC`);
 
     res.status(200).json(result.rows);
-  } catch (err) {
-    res.status(500).json({ error: "request failed" });
+  } catch (err: any) {
+    console.error("Database query failed:", err);
+    res.status(500).json({ error: "request failed", details: err.message });
   }
 });
 

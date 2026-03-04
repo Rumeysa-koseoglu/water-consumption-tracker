@@ -30,7 +30,7 @@ function DailyUsageList({
           </tr>
         </thead>
         <tbody>
-          {entries.map((item) => (
+          {(Array.isArray(entries) ? entries : []).map((item) => (
             <tr
               key={item.id}
               className="border-b border-gray-700 hover:bg-[#2d3a54] transition-colors"
@@ -64,7 +64,7 @@ function DailyUsageList({
         <h3 className="text-[#9ec8fb] text-xl uppercase font-bold mb-2">
           Usage History
         </h3>
-        {entries.map((item) => (
+        {(Array.isArray(entries) ? entries : []).map((item) => (
           <div
             key={item.id}
             className="bg-[#1b2537] p-4 rounded-lg flex justify-between items-center border-l-4 border-[#79bef5]"
