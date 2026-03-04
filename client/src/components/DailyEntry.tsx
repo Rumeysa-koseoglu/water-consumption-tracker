@@ -59,12 +59,12 @@ function DailyEntry({
 
   return (
     <div
-      className={`p-5 bg-[#243046] rounded-xl text-gray-400 transition-all duration-300 border-2 ${
-        editEntry ? "border-blue-500 shadow-lg shadow-blue-500/20" : "border-transparent "
+      className={`p-5 bg-[#243046] rounded-xl text-gray-400 ${
+        editEntry && "border border-blue-700 shadow shadow-blue-400"
       }`}
       id="entry-container"
     >
-      <h1 className="mb-4 text-lg font-bold text-gray-200">
+      <h1 className="mb-4 text-lg font-bold text-[#9ec8fb] uppercase">
         Daily Water Entry
       </h1>
       <form className="flex flex-col gap-5" onSubmit={submitEntry}>
@@ -103,8 +103,9 @@ function DailyEntry({
             <option value="Other">Other</option>
           </select>
         </div>
-        <button className="bg-[#284d79] rounded-3xl mt-4 text-gray-200 font-bold flex items-center justify-start gap-4 py-2 px-4 w-[40%] cursor-pointer active:scale-95">
-          <FolderPlus size={25} color="#0a2a50" /> {editEntry ? "Update Entry" : "Add Entry"}
+        <button className="bg-[#284d79] rounded-3xl mt-4 text-gray-200 font-bold flex items-center justify-start gap-4 py-2 px-4 w-[30%] cursor-pointer active:scale-95">
+          <FolderPlus size={25} color="#13325b" />
+          {editEntry ? "Update Entry" : "Add Entry"}
         </button>
       </form>
     </div>
