@@ -10,7 +10,7 @@ interface WeeklyUsageSummaryProps {
 function WeeklyUsageSummary({ data }: WeeklyUsageSummaryProps) {
   const maxUsage = Math.max(...data.map((d) => d.total), 1);
   return (
-    <div className="h-60 md:h-100 ">
+    <div className="h-60 md:h-full">
       <div className="bg-[#243046] p-6 rounded-2xl h-full">
         <h3 className="text-[#9ec8fb] text-lg md:text-xl font-bold md:mb-8 uppercase">
           Weekly Usage Summary
