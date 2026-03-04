@@ -32,7 +32,7 @@ const LoginPage: React.FC = () => {
     <div className="w-screen h-screen flex flex-col  md:p-10">
       <div className="flex flex-col h-50 w-full items-center">
         <p
-          className=" md:flex text-4xl lg:text-6xl  text-center text-[#84b0d3]
+          className=" md:flex text-4xl lg:text-6xl  text-center text-[#9ec8fb]
       mt-8 font-bold font-bungee word-spacing-sm md:word-spacing"
         >
           WELCOME TO WA
