@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import DailyEntry from "./DailyEntry";
-import DailyTotal from "./DailyTotal";
-import DailyUsageByCategory from "./DailyUsageByCategory";
-import DailyUsageList from "./DailyUsageList";
-import Header from "./Header";
-import WeeklyUsageSummary from "./WeeklyUsageSummary";
+import DailyEntry from "../../../features/water-entry/ui/DailyEntry.js";
+import DailyTotal from "../../../entities/water-usage/ui/DailyTotal.js";
+import DailyUsageByCategory from "../../../entities/water-usage/ui/DailyUsageByCategory.js";
+import DailyUsageList from "../../../widgets/usage-list/ui/DailyUsageList.js";
+import Header from "../../../widgets/header/ui/Header.js";
+import WeeklyUsageSummary from "../../../entities/water-usage/ui/WeeklyUsageSummary.js";
 
 const Dashboard: React.FC = () => {
   const [entries, setEntries] = useState<any[]>([]);

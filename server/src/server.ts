@@ -9,7 +9,10 @@ const PORT = process.env.PORT || 5500;
 
 app.use(
   cors({
-    origin: "https://water-consumption-tracker.onrender.com",
+    origin: [
+      "http://localhost:5173",
+      "https://water-consumption-tracker.onrender.com",
+    ],
   })
 );
 app.use(express.json());
