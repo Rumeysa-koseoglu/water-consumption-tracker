@@ -11,7 +11,11 @@ const Dashboard: React.FC = () => {
   const [editEntry, setEditEntry] = useState<any | null>(null);
 
   const fetchEntries = async () => {
-    const URL = `${import.meta.env.VITE_API_URL}/api/water/get-entries`;
+    const baseURL = import.meta.env.VITE_API_URL;
+
+    const URL = `${baseURL}/api/water/get-entries`;
+    console.log("fetching from;", URL);
+
     try {
       const res = await fetch(URL);
       const data = await res.json();
@@ -39,13 +43,14 @@ const Dashboard: React.FC = () => {
   const deleteEntry = async (id: string) => {
     if (!window.confirm("Are you sure you want to delete this?")) return;
 
+    const baseURL = import.meta.env.VITE_API_URL;
+
+    const URL = `${baseURL}/api/water/delete-entry/${id}`;
+
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/water/delete-entry/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const res = await fetch(URL, {
+        method: "DELETE",
+      });
 
       if (res.ok) fetchEntries();
     } catch (err) {

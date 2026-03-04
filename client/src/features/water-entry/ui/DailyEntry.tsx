@@ -29,9 +29,11 @@ function DailyEntry({
 
     const method = editEntry ? "PUT" : "POST";
 
+    const baseURL = import.meta.env.VITE_API_URL;
+
     const URL = editEntry
-      ? `${import.meta.env.VITE_API_URL}/api/water/entries/${editEntry.id}`
-      : `${import.meta.env.VITE_API_URL}/api/water/add-entry`;
+      ? `${baseURL}/api/water/entries/${editEntry.id}`
+      : `${baseURL}/api/water/add-entry`;
 
     try {
       const res = await fetch(URL, {

@@ -13,8 +13,12 @@ const LoginPage: React.FC = () => {
   const handleLogin = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
-      const URL = `${import.meta.env.VITE_API_URL}/api/auth/login`;
-      const response = await axios.post(URL, { email, password });
+      const baseURL = import.meta.env.VITE_API_URL;
+      const URL = `${baseURL}/api/auth/login`;
+      const response = await axios.post(URL, {
+        email,
+        password,
+      });
       console.log(response.data);
 
       if (response.data.authenticated === true) {
