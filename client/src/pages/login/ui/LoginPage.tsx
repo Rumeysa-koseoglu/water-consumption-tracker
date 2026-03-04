@@ -13,7 +13,8 @@ const LoginPage: React.FC = () => {
   const handleLogin = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
-      const URL = "http://localhost:5500/api/auth/login";
+      const URL =
+        "https://water-consumption-tracker-backend.onrender.com/api/auth/login";
       const response = await axios.post(URL, { email, password });
       console.log(response.data);
 

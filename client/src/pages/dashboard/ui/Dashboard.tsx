@@ -42,7 +42,7 @@ const Dashboard: React.FC = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5500/api/water/delete-entry/${id}`,
+        `https://water-consumption-tracker-backend.onrender.com/api/water/delete-entry/${id}`,
         {
           method: "DELETE",
         }
